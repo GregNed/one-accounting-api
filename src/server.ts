@@ -61,10 +61,8 @@ const calculateBalanceValidation: ValidationChain[] = [
     .isNumeric()
     .withMessage('initialBalance must be a number'),
   body('transactions')
-    .isArray()
-    .withMessage('transactions must be an array')
-    .notEmpty()
-    .withMessage('transactions array cannot be empty'),
+    .isArray({ min: 1 })
+    .withMessage('transactions must be a non-empty array'),
   body('transactions.*.type')
     .isIn(['credit', 'debit'])
     .withMessage('Transaction type must be either "credit" or "debit"'),
@@ -245,8 +243,6 @@ app.get('/health', (req: Request, res: Response): void => {
   res.json({ status: 'ok' });
 });
 
-// Start server
-app.listen(PORT, (): void => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Export app for testing
+export default app;
 

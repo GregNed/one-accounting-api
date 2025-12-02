@@ -8,4 +8,7 @@ README.md
 .env.local
 *.log
 .DS_Store
+coverage
+*.test.ts
+vitest.config.ts
 
