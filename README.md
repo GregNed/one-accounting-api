@@ -2,6 +2,20 @@
 
 A TypeScript-based REST API built with Express.js that calculates final account balances based on an initial balance and a series of transactions.
 
+## Implementation choices
+I have worked with Express before, so I chose it as a quick and familiar option although I am aware that there are now Nuxt.js and other more modern alternatives. I'm using TypeScript as a good practice for catching type-related code errors before runtime, although for this tiny example it's an overkill. 
+
+I've also added a CI/CD that builds JS from TS, dockerizes the output, pushes it to Dockerhub and deploy on AWS ECS Fargate (Serverless). That is the setup I use at work for the main backend. Strictly speaking, going serverless here does not make sense since it is a proto of the main backend, which will be used close 100% of the time. But serverless is so much easier to set up and manage, and the cost differences are not that big anymore, so it is very tempting. The CD currently fails because all dockerhub and aws resources do not actually exist, but the prototype is working.
+
+# AI usage
+I used Cursor (Composer 1) to save time writing boilerplate code, but I did thoroughly review its every suggestion. I also guided it to add Decimal handling, request body type validation, TypeScript, and Swagger. Key prompts:
+- Create a Web API endpoint that calculates the final account balance based on an initial balance and a series of transactions. Use node.js express. The implementation details are ...
+- use ES modules
+- can you use some api schema for validating request input types?
+- given that we're calculating money here, should i beware of floating point round errors?
+- create tests
+- add Swagger
+
 ## Features
 
 - ✅ Calculate account balances with credit and debit transactions
